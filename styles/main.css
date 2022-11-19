@@ -1,9 +1,12 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: #555;
     font-family: Calibri;
     color: #fff;
+}
+
+html {
+    background-color: #555;
 }
 
 :root {
@@ -13,4 +16,82 @@
 .container {
     width: 100%;
     min-height: 100vh;
+}
+
+
+.clock {
+    background-color: #aaa;
+    width: 70%;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    position: relative;
+}
+
+.num {
+    --rotate: 0deg;
+    font-size: 2rem;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    rotate: var(--rotate);
+    z-index: 11;
+}
+
+.num_1 {--rotate: 0deg;}
+.num_2 {--rotate: 30deg;}
+.num_3 {--rotate: 60deg;}
+.num_4 {--rotate: 90deg;}
+.num_5 {--rotate: 120deg;}
+.num_6 {--rotate: 150deg;}
+.num_7 {--rotate: 180deg;}
+.num_8 {--rotate: 210deg;}
+.num_9 {--rotate: 240deg;}
+.num_10 {--rotate: 270deg;}
+.num_11 {--rotate: 300deg;}
+.num_12 {--rotate: 330deg;}
+
+.clock::after {
+    content: '';
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    background-color: #555;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    z-index: 12;
+    border-radius: 100%;
+}
+
+.hand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: top;
+    rotate: 180deg;
+    translate: -50% 0;
+    background-color: #555;
+    z-index: 10;
+    display: none;
+    border-bottom-left-radius: 1000px;
+    border-bottom-right-radius: 1000px;
+}
+
+.hour {
+    height: 20%;
+    width: 3%;
+}
+
+.minute {
+    height: 35%;
+    width: 1.75%;
+}
+
+.second {
+    height: 40%;
+    width: 1.2%;
+    background-color: #c00;
+    /* transition: rotate 1s linear; */
 }
