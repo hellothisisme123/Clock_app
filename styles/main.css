@@ -9,20 +9,16 @@ html {
     background-color: #555;
 }
 
-:root {
-
-}
-
 .container {
     width: 100%;
     min-height: 100vh;
 }
 
-
+/* analog spinny clock start */
 .clock {
     background-color: #aaa;
     width: 70%;
-    margin: 0 auto;
+    margin: 3% auto;
     aspect-ratio: 1 / 1;
     border-radius: 100%;
     position: relative;
@@ -54,7 +50,7 @@ html {
 
 .clock::after {
     content: '';
-    width: 2rem;
+    width: 10%;
     aspect-ratio: 1 / 1;
     background-color: #555;
     position: absolute;
@@ -95,3 +91,204 @@ html {
     background-color: #c00;
     /* transition: rotate 1s linear; */
 }
+/* analog spinny clock end */
+
+
+
+/* digital clock start */
+.digital_clock {
+    width: 85%;
+    aspect-ratio: 20 / 7;
+    margin: 5% auto;
+    background-color: #222;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 0.5rem solid #111;
+    border-radius: 0.5rem;
+}
+
+.slot {
+    box-sizing: border-box;
+    position: relative;
+}
+
+.colin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+:root {
+    --unlit_segment: #3334;
+    --lit_segment: #bbb;
+    --seg_width: 10px;
+    --tringle_width: calc(var(--seg_width) * 0.7);
+    --tringle_length: calc(var(--seg_width) / 2);
+}
+
+.segment {
+    background-color: var(--unlit_segment);
+    position: absolute;
+}
+
+.dot {
+    width: var(--seg_width);
+    aspect-ratio: 1 / 1;
+    background-color: var(--unlit_segment);
+    border-radius: 1000px;
+}
+
+.trap_wide {
+    aspect-ratio: 5 / 1;
+    height: var(--seg_width);
+    left: 50%;
+    translate: -50%;
+}
+
+.trap_tall {
+    aspect-ratio: 1 / 5;
+    width: var(--seg_width);
+}
+
+.seg_1 { top: 5%; } /* wide */
+
+.seg_2 { /* wide */
+    top: 50%;
+    translate: -50% -50%;
+}
+
+.seg_3 { bottom: 5%; } /* wide */
+
+.seg_4, .seg_5 { left: 10%; } /* tall */
+
+.seg_4, .seg_6 { top: 14%; } /* tall */
+
+.seg_5, .seg_7 { bottom: 14%; } /* tall */
+
+.seg_6, .seg_7 { right: 10%; } /* tall */
+
+.lit { background-color: var(--lit_segment); }
+
+.trap_wide::after, .trap_wide::before { /* tringles on the sides */
+    border-top-width: var(--tringle_length);
+    border-top-color: transparent;
+    border-top-style: solid;
+
+    border-bottom-width: var(--tringle_length);
+    border-bottom-color: transparent;
+    border-bottom-style: solid;
+}
+
+.lit.trap_wide::after { border-left-color: var(--lit_segment); } /* tringles on the sides */
+
+.lit.trap_wide::before { border-right-color: var(--lit_segment); } /* tringles on the sides */
+
+.trap_wide::after { /* tringles on the sides */
+    content: '';
+    display: block;
+    
+    border-left-width: var(--tringle_width);
+    border-left-color: var(--unlit_segment);
+    border-left-style: solid;
+
+    position: absolute;
+    right: calc(var(--tringle_width) * -1);
+}
+
+.trap_wide::before { /* tringles on the sides */
+    content: '';
+    display: block;
+    
+    border-right-width: var(--tringle_width);
+    border-right-color: var(--unlit_segment);
+    border-right-style: solid;
+
+    position: absolute;
+    left: calc(var(--tringle_width) * -1);
+}
+
+.trap_tall::after, .trap_tall::before { /* tringles on the sides */
+    border-left-width: var(--tringle_length);
+    border-left-color: transparent;
+    border-left-style: solid;
+
+    border-right-width: var(--tringle_length);
+    border-right-color: transparent;
+    border-right-style: solid;
+}
+
+.lit.trap_tall::after { border-bottom-color: var(--lit_segment); } /* tringles on the sides */
+
+.lit.trap_tall::before { border-top-color: var(--lit_segment); } /* tringles on the sides */
+
+.trap_tall::after { /* tringles on the sides */
+    content: '';
+    display: block;
+
+    border-bottom-width: var(--tringle_width);
+    border-bottom-color: var(--unlit_segment);
+    border-bottom-style: solid;
+
+    position: absolute;
+    top: calc(var(--tringle_width) * -1);
+}
+
+.trap_tall::before { /* tringles on the sides */
+    content: '';
+    display: block;
+
+    border-top-width: var(--tringle_width);
+    border-top-color: var(--unlit_segment);
+    border-top-style: solid;
+
+    position: absolute;
+    bottom: calc(var(--tringle_width) * -1);
+}
+
+/* digital clock end */
+
+
+@media screen and (width >= 800px) {
+    :root {
+        --seg_width: 14px;
+    }
+}
+
+@media screen and (width >= 1000px) {
+    :root {
+        --seg_width: 18px;
+    }
+}
+
+@media screen and (width >= 1300px) {
+    :root {
+        --seg_width: 20px;
+    }
+    .num {
+        font-size: 4rem;
+    }
+    .clock {
+        width: 40%;
+    }
+}
+
+@media screen and (width >= 1500px) {
+    :root {
+        --seg_width: 24px;
+    }
+}
+
+@media screen and (width >= 1700px) {
+    :root {
+        --seg_width: 30px;
+    }
+}
+
+@media not all and (min-resolution:.001dpcm) /* only on safari cuz square root css is only on the worst browser */
+{ @supports (-webkit-appearance:none) {
+    :root { 
+        --tringle_width: calc(sqrt(var(--seg_width)) / 2); 
+    }
+}}
