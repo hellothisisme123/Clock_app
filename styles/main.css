@@ -98,10 +98,11 @@ html {
 /* digital clock start */
 .digital_clock {
     width: 85%;
-    aspect-ratio: 20 / 7;
+    aspect-ratio: 25 / 7;
     margin: 5% auto;
     background-color: #222;
     display: grid;
+    column-gap: 3rem;
     grid-template-columns: repeat(5, 1fr);
     border: 0.5rem solid #111;
     border-radius: 0.5rem;
@@ -126,6 +127,8 @@ html {
     --seg_width: 10px;
     --tringle_width: calc(var(--seg_width) * 0.7);
     --tringle_length: calc(var(--seg_width) / 2);
+    --wide_seg_aspect: 5 / 1;
+    --tall_seg_aspect: 1 / 5;
 }
 
 .segment {
@@ -141,14 +144,14 @@ html {
 }
 
 .trap_wide {
-    aspect-ratio: 5 / 1;
+    aspect-ratio: var(--wide_seg_aspect);
     height: var(--seg_width);
     left: 50%;
     translate: -50%;
 }
 
 .trap_tall {
-    aspect-ratio: 1 / 5;
+    aspect-ratio: var(--tall_seg_aspect);
     width: var(--seg_width);
 }
 
@@ -249,16 +252,65 @@ html {
 
 /* digital clock end */
 
+@media screen and (width >= 300px) {
+    :root {
+        --seg_width: 2px;
+        --tall_seg_aspect: 1 / 14;
+    }
+}
+
+@media screen and (width >= 400px) {
+    :root {
+        --seg_width: 3px;
+        --tall_seg_aspect: 1 / 11;
+        --wide_seg_aspect: 7 / 1;
+    }
+}
+
+@media screen and (width >= 500px) {
+    :root {
+        --seg_width: 5px;
+        --tall_seg_aspect: 1 / 7;
+        --wide_seg_aspect: 5 / 1;
+    }
+}
+
+@media screen and (width >= 600px) {
+    :root {
+        --seg_width: 8px;
+        --tall_seg_aspect: 1 / 5;
+        --wide_seg_aspect: 4 / 1;
+    }
+}
 
 @media screen and (width >= 800px) {
     :root {
-        --seg_width: 14px;
+        --seg_width: 10px;
+        --tall_seg_aspect: 1 / 5;
+    }
+    .num {
+        font-size: 3rem;
+    }
+    .clock {
+        width: 40%;
+    }
+}
+
+@media screen and (width >= 900px) {
+    :root {
+        --seg_width: 11px;
     }
 }
 
 @media screen and (width >= 1000px) {
     :root {
-        --seg_width: 18px;
+        --seg_width: 14px;
+    }
+}
+
+@media screen and (width >= 1200px) {
+    :root {
+        --seg_width: 17px;
     }
 }
 
@@ -266,23 +318,20 @@ html {
     :root {
         --seg_width: 20px;
     }
-    .num {
-        font-size: 4rem;
-    }
-    .clock {
-        width: 40%;
-    }
 }
 
-@media screen and (width >= 1500px) {
+@media screen and (width >= 1650px) {
     :root {
-        --seg_width: 24px;
+        --seg_width: 26px;
     }
 }
 
-@media screen and (width >= 1700px) {
+@media screen and (width >= 1850px) {
     :root {
         --seg_width: 30px;
+        --tall_seg_aspect: 1 / 4;
+        --wide_seg_aspect: 5 / 1;
+        
     }
 }
 
